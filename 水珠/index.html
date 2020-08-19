@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://v.bootstrapmb.com/2020/7/fpa6e8496/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>www.bootstrapmb.com - dropplets</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="no-filter">
+<div class="paper"></div>
+<div class="dropplets no-filter">
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+  <div class="dropplet"></div>
+</div>
+</div>
+<svg width="0" height="0">
+  <filter id="paper">
+    <feturbulence type="fractalNoise" baseFrequency="0.03 0.06" numOctaves="10" result="noise"></feturbulence>
+    <fediffuselighting in="noise" lighting-color="#e2e1db" surfaceScale="2">
+      <fedistantlight azimuth="45" elevation="40"></fedistantlight>
+    </fediffuselighting>
+  </filter>
+  <filter id="water">
+    <feturbulence type="fractalNoise" baseFrequency="0.03 0.06" numOctaves="10" result="noise"></feturbulence>
+    <fediffuselighting in="noise" lighting-color="#e2e1db" surfaceScale="4" result="texture">
+      <fedistantlight azimuth="45" elevation="35"></fedistantlight>
+    </fediffuselighting>
+    <fecomposite in="texture" in2="SourceGraphic" operator="in"></fecomposite>
+  </filter>
+</svg>
+<!-- partial -->
+  
+
+
+<div id="ycce-container" style="font-family: -apple-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39;,Roboto,&#39;Helvetica Neue&#39;,Arial,sans-serif;font-size: 14px;font-weight: 400;line-height: 1.5;color: #292b2c;background-color: #fff;margin: 0;"></div></body></html>

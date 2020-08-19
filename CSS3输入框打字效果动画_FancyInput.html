@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://v.bootstrapmb.com/2018/8/h6hdm1802/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	
+	<title>CSS3输入框打字效果动画|FancyInput</title>
+	 
+	<link rel="stylesheet" href="./CSS3输入框打字效果动画_FancyInput_files/styles.css">
+	<link rel="stylesheet" href="./CSS3输入框打字效果动画_FancyInput_files/fancyInput.css">
+	<!--[if lt IE 9]><script src="html5.js"></script><![endif]-->
+	<script src="./CSS3输入框打字效果动画_FancyInput_files/jquery.min.js.下载"></script>
+</head>
+<body>
+	<div id="wrap">
+		<header>
+			<div class="social"></div>
+			<menu>
+				<button class="">Effect 1</button>
+				<button class="active">Effect 2</button>
+				<button>Effect 3</button>
+				<button>Effect 4</button>
+				<button>Effect 5</button>
+			</menu>
+			<menu class="radio">
+				<label><input type="radio" value="input" name="type"><span>input</span></label>
+				<label><input type="radio" value="textarea" name="type"><span>textarea</span></label>
+				<div style="left: 2px; width: 64px;"></div>
+			</menu>
+		</header>
+		
+		<div id="content" class="effect2" style="transform: translateX(0%);">
+			<section class="input">
+
+				<div class="fancyInput">
+					<input type="text" placeholder="type something..." style="width: 2853px;">
+				<div data-placeholder="type something..." class=""><span>t</span><span>y</span><span>p</span><span>e</span><span>&nbsp;</span><span>s</span><span>o</span><span>m</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>d</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><span>a</span><span>s</span><span>d</span><span>f</span><b class="caret" style="height: 78px;">​</b><span>e</span><span>t</span><span>h</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span><span>&nbsp;</span><span>✌</span></div></div>
+			</section>
+			<section class="textarea">
+				<div class="fancyInput textarea">
+					<textarea cols="1"></textarea>
+				<div class="empty"><b class="caret">​</b></div></div>
+			</section>
+		</div>
+	
+	</div>
+	<script src="./CSS3输入框打字效果动画_FancyInput_files/fancyInput.js.下载"></script>
+	<script>
+		// Capture TAB to switch between the Demo page views (input/textarea)
+		(function(){
+			var viewTogglers = $('menu.radio input');
+			
+			$(document).on('keydown', function(e){
+				if( e.key == 'tab' || e.keyCode == 9 ){
+					var $checked = viewTogglers.filter(':checked');
+					var $next = viewTogglers.eq(viewTogglers.index($checked) + 1);
+					if(!$next.length){
+						$next = viewTogglers.first();
+					}
+					$next.prop("checked", true).change();
+						
+					return false;
+				}
+			});
+		})();
+	
+		$('section :input').val('').fancyInput()[0].focus();
+
+		// Everything below is only for the DEMO
+		function init(str){
+			var input = $('section input').val('')[0],
+				s = 'type something... ✌'.split('').reverse(),
+				len = s.length-1,
+				e = $.Event('keypress');
+				
+				input.nextElementSibling.className = '';
+			
+			var	initInterval = setInterval(function(){
+					if( s.length ){
+						var c = s.pop();
+						fancyInput.writer(c, input, len-s.length).setCaret(input);
+						input.value += c;
+						//e.charCode = c.charCodeAt(0);
+						//input.trigger(e);
+						
+					}
+					else clearInterval(initInterval);
+			},150);
+		}
+		
+		init();
+		
+		$('menu').on('click', 'button', toggleEffect);
+		$('menu.radio').on('change', 'input', changeForm).find('input:first').prop('checked',true).trigger('change');
+		
+		// change effects
+		function toggleEffect(num){
+			var className = '';
+				idx = $(this).index() + 1,
+				$fancyInput = $('.fancyInput');
+
+			if( idx > 1 )
+				className = 'effect' + idx;
+
+			$('#content').prop('class', className);
+			$fancyInput.find(':input')[0].focus();
+			
+			$(this).addClass('active').siblings().removeClass('active');
+		}
+		
+		function changeForm(e){
+			// radio buttons stuff
+			var page = this.value,
+				highlight = $(e.delegateTarget).find('> div'),
+				label = $(this.parentNode),
+				marginLeft = parseInt( label.css('margin-left') , 10 ),
+				xPos;
+				
+			highlight.css({'left':label.position().left + marginLeft, 'width':label.width() });
+			
+			// page change stuff
+			xPos = '-' + label.index() * 50;
+			$('#content').css( 'transform', 'translateX(' + xPos + '%)' );
+			
+			setTimeout(function(){
+				$('#content').find('.' + page  + ' :input')[0].focus();
+			}, 100);
+		}
+		
+		// social sharing stuff
+		setTimeout(addSocial,500);
+		
+		
+	</script>
+ 
+
+<div id="ycce-container" style="font-family: -apple-system,system-ui,BlinkMacSystemFont,&#39;Segoe UI&#39;,Roboto,&#39;Helvetica Neue&#39;,Arial,sans-serif;font-size: 14px;font-weight: 400;line-height: 1.5;color: #292b2c;background-color: #fff;margin: 0;"><!-- react-empty: 1 --></div></body></html>
